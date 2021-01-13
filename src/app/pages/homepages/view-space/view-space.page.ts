@@ -13,7 +13,7 @@ import * as moment from 'moment';
 
 import {  PopoverController } from '@ionic/angular';
 import { MessagesPage } from 'src/app/feedback/messages/messages.page';
-/*Remove */
+/*Remove  extraAmenities*/
 import { AlertController,LoadingController } from '@ionic/angular'; 
 
 
@@ -81,7 +81,7 @@ export class ViewSpacePage implements OnInit {
         this.profileuid= doc.data().user_uid
         this.favSpace=doc.id;
         this.workspace_uid= doc.data().workspace_uid
-      //  this.extraAmenities.push(doc.data().extraAmenities) ;
+        this.extraAmenities= Object.values(doc.data().extraAmenities) ;
        console.log( doc.data())
     })
   }else if(this.userservice.getSpaceId()){
@@ -117,6 +117,7 @@ export class ViewSpacePage implements OnInit {
         this.category_number= doc.data().category_number;
         this.uid= doc.data().uid;
         this.profileuid= doc.data().user_uid
+        this.extraAmenities= Object.values(doc.data().extraAmenities) ;
         this.favSpace=doc.id;
        console.log( doc.data())
        this.workspace_uid= doc.data().workspace_uid
@@ -323,7 +324,7 @@ getFavouritesuid(){
 CreatePopover() 
 {
 
-this.showAlert()   
+this.showAlert();   
   this.loader.create({
     message: 'This Loader Will Auto Hide in 2 Seconds',
     duration: 2000

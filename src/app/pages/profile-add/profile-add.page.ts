@@ -42,10 +42,12 @@ name_:any;
   surname_:any;
   email_:any;
  phone_:any;
+ address_:any;
   // aboutus_:any;
   // company_tel_:any;
-  // company_address_:any;
+  
   editForm:boolean=false;
+  img_: any;
   // outside_features:any=[]
 
 
@@ -86,11 +88,12 @@ name_:any;
 
       snap.forEach(doc => {
       this.array.push(Object.assign(doc.data(),{"profile_uid":doc.id}) )
-      this.name_ = doc.data().company_name;
-      this.surname_=doc.data().company_tel;
-      this.phone_=doc.data().company_address;
-      this.email_=doc.data().company_website;
-
+      this.name_ = doc.data().name;
+      this.surname_=doc.data().surname;
+      this.phone_=doc.data().phone;
+      this.email_=doc.data().email;
+      this.address_=doc.data().address;
+      this.img_=doc.data().img_profile;
 
 
 
@@ -205,8 +208,7 @@ fileChangeEvent(fileInput: any) {
 }
 
  submit() {
-    console.log( this.updateForm.value.name
-                )
+    console.log( this.updateForm.value.name)
    this.ownerservice.updateUserProfile(this.useruid, this.account.getUserSession(),
                    this.updateForm.value.name,
                    this.updateForm.value.surname,
@@ -218,14 +220,14 @@ fileChangeEvent(fileInput: any) {
      }
      editForms(){
 
-
-      this.ownerservice.updateUserProfile(this.useruid, this.account.getUserSession(),
-      this.updateForm.value.name,
-      this.updateForm.value.surname,
-       this.updateForm.value.address,
-       this.updateForm.value.email,
-       this.updateForm.value.phone,
-       this.cardImageBase64)
+   console.log("------------"+this.surname_) 
+      this.ownerservice.updateUserProfile(this.useruid,this.account.getUserSession(),
+      this.name_,
+      this.surname_,
+       this.address_,
+       this.email_,
+       this.phone_,
+       this.img_)
        this.  CreatePopover()
      }
    

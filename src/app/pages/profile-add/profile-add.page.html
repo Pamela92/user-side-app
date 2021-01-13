@@ -108,12 +108,13 @@
   <br><br><br><br><br>
     </form>
     <ng-template #loggedOut>
+      
       <form  #editForm="ngForm" *ngFor="let x of array"  type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
        
         <ion-item>         
            <ion-input
               type="text"    
-              [(ngModel)]="x.name" 
+              [(ngModel)]="name_" 
               name="name" 
               placeholder="Company name.."
               required
@@ -136,7 +137,7 @@
           <ion-input  
               type="text"  
               placeholder="surname"
-              [(ngModel)]="x.surname" 
+              [(ngModel)]="surname_" 
               name="surname"
               required
               minlength="2"
@@ -144,7 +145,7 @@
               #surname="ngModel" 
               >
           </ion-input>
-          <div style="color:red;" *ngIf="!surname?.valid && (surname?.dirty || surname?.touched)">
+           <div style="color:red;" *ngIf="!surname?.valid && (surname?.dirty || surname?.touched)">
             Invalid surname
             <div *ngIf="surname.errors.required">
               Surname is required
@@ -155,13 +156,13 @@
            <div *ngIf="surname.errors.pattern">
             Alphabets only!
           </div>
-         </div>
+         </div> 
         </ion-item>
        <ion-item>
          <ion-input  
           type="text"  
           placeholder="Email"
-          [(ngModel)]="x.email"
+          [(ngModel)]="email_"
           required 
           email 
           #email="ngModel" 
@@ -181,7 +182,7 @@
         <ion-input  
            type="text"  
            placeholder="phone"
-           [(ngModel)]="x.phone" 
+           [(ngModel)]="phone_" 
            name="phone"
            required
            maxlength="10"
@@ -203,8 +204,8 @@
 
   <ion-textarea  
            type="text"  
-           placeholder="Description"
-           [(ngModel)]="x.address" 
+           placeholder="address"
+           [(ngModel)]="address_" 
            name="address" 
            required
            maxlength="50"
@@ -221,14 +222,7 @@
    </div>
 
    </div>
-  <ion-item>
-    <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
-   <div>
-     <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
-   </div>
-   
-    <button (click)="changeImage()"> Change Profile</button>
-  </ion-item>
+
   
 
 
@@ -242,7 +236,16 @@
 
 
 
-  <br><br><br><br><br>
+  <br>
+  <h3>Change Profile Picture</h3>
+  <ion-item>
+    <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+   <div>
+     <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+   </div>
+   
+    <button (click)="changeImage()"> Change Profile</button>
+  </ion-item>
     </form>
  
 
