@@ -1,0 +1,164 @@
+
+ion-content{
+    display: flex;
+    justify-content: center;
+    align-items:center ;  
+    position: absolute;
+    --background: #1D2729;
+  }
+  
+  .bgImg{
+  position: absolute;
+  height: 70%;
+  width: 100%;
+
+  
+  }
+  
+  .wrapper{
+      width: 100%;
+      height: 100%;
+     background-color: #1D2729;
+     opacity: 90%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+  
+  }
+  .textBorder{
+      width: 100%;
+      height: 29%;
+      //border-style: solid;
+    border-right: 0px;
+    border-left: 0px;
+    border-top: 0px;
+      border-color: grey;
+      position: absolute;
+      top: 3%;
+      left: 3px;
+      border-width: 1px;
+     
+     color: white;
+  }
+  .date{
+      font-size: 10px;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+  }
+  .stats{ 
+    //border-style: solid;
+    border-radius: 6px;
+    background-color:#303d3d;
+    width: 90%;
+    height: 5%;
+    border-color: white;
+    position: absolute;
+    top: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .stats2{ 
+    //border-style: solid;
+    border-radius: 6px;
+  
+    width: 90%;
+    height: 5%;
+    border-color: white;
+    position: absolute;
+    top: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  .catagories{
+      width: 100%;
+      height: 10%;
+    //border-style: solid;
+  border-color: honeydew;
+  position: absolute;
+  bottom: 50%;
+     
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+  }
+  
+  .bottom{
+      width: 100%;
+      height: 40%;
+    //border-style: solid;
+  //border-color: honeydew;
+  position: absolute;
+  bottom: 9%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 0px;
+  
+  border-width: 1px;
+  
+  }
+  .bottom1{
+  width: 50%;
+  height: 70%;
+  //border-style: solid;
+  position: absolute;
+  left: 5%;
+  top: 20%;
+  }
+  .bottom2{
+      width: 45%;
+      height: 33%;
+      //border-style: solid;
+      position: absolute;
+      right: 3%;
+      top: 20%;
+      }
+  
+      .bottom3{
+        width: 45%;
+          height: 35%;
+          //border-style: solid;
+          position: absolute;
+          right: 3%;
+          top:55%;
+          }
+          .bottomText{
+              position: absolute;
+              top: 0%;
+              left: 5%;
+              color: rgb(156, 156, 156);
+              top: 12%;
+          }
+          ion-card{
+              display: flex;
+              justify-content: center;
+              align-items: center; 
+              color: white;
+          }
+  
+          .history{
+            background-color: white;
+         
+            //border-style: solid;
+            width: 70%;
+            height: 90%;
+            // border-radius: 16px;
+            
+          }
+  .segments{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

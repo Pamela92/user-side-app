@@ -1,0 +1,96 @@
+
+
+// .wrapper{
+//     width: 100%;
+//     height: 100%;
+//     background-color: #F6F6F6;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+// }
+// .profileview{
+//     position: absolute;
+//     top: 0%;
+//     width: 100%;
+//     height: 90%;
+//     background-color: #F6F6F6;
+//     border-bottom-left-radius: 16px;
+//     border-bottom-right-radius: 16px;
+//     display: flex;
+//      justify-content: center;
+//      align-items: center;
+
+// }
+
+// .addprofile{
+//     width: 100%;
+//     height: 20%;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+   
+//     background-color: #16D6E3;
+//     opacity: 60%;
+//     position: absolute;
+//     bottom: 0px;
+
+// }
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+.top{
+    width: 100%;
+    height: 40%;
+    //border-style: solid;
+    position: absolute;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.img{
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    
+}
+.bottom{
+    background-color: whitesmoke;
+    position: absolute;
+    //border-style: solid;
+    width: 100%;
+    height: 20%;
+    top: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.segments{
+
+    position: absolute;
+    //border-style: solid;
+    width: 100%;
+    height: 40%;
+    bottom: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+ion-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

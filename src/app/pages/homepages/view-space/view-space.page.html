@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons *ngIf="!this.account.getUserSession()" slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons (click)="back()" *ngIf="this.account.getUserSession()"  slot="start">
+      <ion-icon  name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4"></ion-col>
+        <ion-col size="4"></ion-col>
+<ion-col  size="4" style="color: rgb(14, 248, 14);" *ngIf="this.account.getUserSession()">
+  <a [routerLink]="'/user-landing'" ><ion-icon name="person-sharp"></ion-icon></a>
+</ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-title>view-space</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+
+    {{this.uid}}
+
+
+   
+    <img style=" z-index: -1;"  [src]="this.image" />
+    <p  *ngIf="this.account.getUserSession()" style=" position: absolute;
+    left: 46%;
+    top: 60px;
+   "><ion-icon (click)="addToFavourites(this.uid, this.workspace_uid,this.favSpace,this.categories,this.price)" style="font-size:4em;color:red;" name="heart-circle-outline"></ion-icon></p>
+  
+    <ion-card-header>
+      <div>
+      <ion-card-title>{{this.categories}} R{{this.price}}.00</ion-card-title>
+      <ion-card-subtitle>{{this.address}}</ion-card-subtitle>spaceid
+      <ion-card-subtitle><a [routerLink] = "['/view-gallary',this.favSpace]" >View Gallary</a></ion-card-subtitle>
+      
+    </div>                                                                                                               
+    <div *ngIf="this.account.getUserSession()">
+      <!-- <a *ngIf="comments==0" (click)="previews()">Comment...</a> || <a *ngIf="comments==0" [routerLink] = "['/viewcomments',this.uid,getSpaceuid,getSpaceId]">View Comments</a><a *ngIf="comments==3" (click)="remove()">close</a><br/> -->
+      <div>
+       <form [formGroup]="previewForm" >
+       <ion-grid>
+         <ion-row>
+           <ion-col > 
+             <ion-textarea formControlName="comment" placeholder="comment here (less than 100 letters)..."></ion-textarea>
+             <div style="color:red;" *ngIf="isValidInputComments('comment')"
+             class="alert alert-danger">
+             <div *ngIf="previewForm.controls['comment'].errors.required">
+               Comment field is empty!
+             </div>
+             <div *ngIf="previewForm.controls['comment'].errors.maxlength"> 
+               Maximum of 100 characters allowed
+             </div> 
+             <div *ngIf="previewForm.controls['comment'].errors.minlength"> 
+               Minimum of 4 characters allowed
+             </div> 
+           </div>
+            </ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col><ion-button   [disabled]="!previewForm.valid" (click)="sendComment()" expand="full" color="success">comment</ion-button></ion-col> 
+           <ion-col><a style="padding-top:30px;" [routerLink] = "['/viewcomments',this.uid,getSpaceuid,getSpaceId]">View Comments</a></ion-col>
+          </ion-row>
+       </ion-grid>
+      </form>
+    </div>  
+    <div *ngIf="comments==3">
+      <span>Posted...</span>
+   </div> 
+    </div>
+    <div>
+      <form [formGroup]="reservationForm"   >
+        <ion-grid>
+        
+          <ion-row>
+            <ion-col>
+              <span>Checkin</span>
+              
+              <ion-input type="date"  
+              [min]="minDate"
+              [max]="maxDate"
+             
+              formControlName="checkin"></ion-input>
+              <div style="color:red;" *ngIf="isValidInput('checkin')"
+              class="alert alert-danger">
+              <div *ngIf="reservationForm.controls['checkin'].errors.required">
+                Checkin date is required.
+              </div>
+            </div>
+            </ion-col>
+            <ion-col>
+              <span>Timein</span>
+              <ion-input [min]="minTime" type="time" formControlName="timein"></ion-input>
+              <div style="color:red;" *ngIf="isValidInput('timein')"
+              class="alert alert-danger">
+              <div *ngIf="reservationForm.controls['timein'].errors.required">
+                timein is required.
+              </div>
+            </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <span>Checkout</span>
+              <ion-input type="date"     
+              [min]="minDate"
+              [max]="maxDate" 
+              formControlName="checkout"></ion-input>
+              <div style="color:red;" *ngIf="isValidInput('checkout')"
+              class="alert alert-danger">
+              <div *ngIf="reservationForm.controls['checkout'].errors.required">
+                checkout date is required.
+              </div>
+            </div>
+            </ion-col>
+            <ion-col>
+              <span>Timeout</span>
+              <ion-input type="time" formControlName="timeout"></ion-input>
+              <div style="color:red;" *ngIf="isValidInput('timeout')"
+              class="alert alert-danger">
+              <div *ngIf="reservationForm.controls['timeout'].errors.required">
+                timeout is required.
+              </div>
+            </div>
+            </ion-col>
+          </ion-row>
+          <ion-row style="color:red;">
+            {{this.messageValue}}
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="this.account.getUserSession()">
+
+          
+
+        <ion-item style="font-size: 1em;" *ngIf="this.total!==0">
+          <ion-grid>
+            <ion-row>
+              <span style="color:green">Space: R{{ this.price }}</span>
+            </ion-row>
+            <ion-row>
+              <span style="color:green">Extras: R{{ this.total }}</span>
+            </ion-row>
+            <ion-row>
+              <span style="color:green">Total: R{{ this.price+this.total }}</span>
+            </ion-row>
+          </ion-grid> 
+          </ion-item> 
+          <ion-row *ngIf="extraAmenities">
+            <ion-col  *ngFor="let x of extraAmenities; let i = index">
+
+              <ion-list style="width: 100%;margin:0px;text-decoration: none;">
+            
+                <div style="text-align: center;">
+                  <button (click)="addExtras(x.anemenity,x.price)" style="border-radius: 100%;height: 50px;width: 50px;">  {{x.anemenity}}</button><br>
+                  <ion-label>R{{x.price}}</ion-label>
+                </div>
+               
+                
+         
+                 
+      
+              </ion-list >
+
+              
+               
+            </ion-col>
+          </ion-row>
+  
+        </ion-grid>
+     
+    <ion-card-content>
+
+<ion-grid >
+  <ion-row>  <span><b>Description</b></span></ion-row>
+  <ion-row>
+  
+   {{this.description}} 
+  </ion-row>
+  <ion-row><span><b>amenities</b></span></ion-row>
+  <ion-row *ngIf="amenities">
+    
+   <ion-col  *ngFor="let y of amenities">
+    {{y}}
+   </ion-col>
+  </ion-row> 
+  <ion-row>
+
+  </ion-row>
+</ion-grid>
+<section class="full-width">
+  <ion-button *ngIf="!this.account.getUserSession()" [routerLink]="'/signin'" expand="full" color="danger">LOGIN</ion-button>
+  <ion-button           [disabled]="!reservationForm.valid"
+  *ngIf="this.account.getUserSession()" (click)="submit()" expand="full" color="secondary">BOOK NOW</ion-button>
+</section>
+   </ion-card-content>
+  </form>
+</div>
+
+ 
+</ion-card-header>
+  </ion-card>
+  <ion-button (click)="showAlert()">Basic Alert</ion-button> 
+
+</ion-content>

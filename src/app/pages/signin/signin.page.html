@@ -1,0 +1,39 @@
+<ion-content>
+
+  <h1 class="header" style="text-align: center; font-weight: bolder; color: rgb(53, 53, 87);" >Sign In</h1>
+ 
+  <div class="FormHolder">
+     
+   <div class="ion-padding">
+   <form class="formload" [formGroup]="LoginForm" (ngSubmit)="submit()" class="ion-padding">
+   
+     <div class="wrap-input">
+     <input class="input" type="email"  formControlName="email" placeholder="Email">
+     <div *ngFor="let error of errorMessages.email">
+       <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+         <small class="error-message">{{error.message}}</small>
+       </ng-container>
+     </div>
+     </div>
+     <br>
+         <div class="wrap-input">
+         <input class="input" type="password" formControlName="password" placeholder="Password">
+         <div *ngFor="let error of errorMessages.password">
+           <ng-container *ngIf="password.hasError(error.type) && (password.dirty || email.touched)">
+             <small class="error-message">{{error.message}}</small>
+           </ng-container>
+         </div>  
+         </div>  
+         <br><br>
+         <div class="container-form-btn">
+         <button  class="form-btn custom-font" type="submit" [disabled]="!LoginForm.valid">Sign In</button>
+         </div>
+         <p class="social" style="text-align: center;">Or using social media</p>
+         <div class="icons">
+         <ion-icon name="logo-facebook"></ion-icon><ion-icon class="google" name="logo-google"></ion-icon><ion-icon class="twitter" name="logo-twitter"></ion-icon>
+         </div>
+           <label class="account" [routerLink]="'/signup'">Don't have an account?</label>Sign Up
+   </form>
+   </div>
+   </div>
+ </ion-content>

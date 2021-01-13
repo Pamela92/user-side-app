@@ -1,0 +1,107 @@
+
+<ion-content>
+
+  <div class="holder">
+    <ion-icon style="position: absolute;left:3%;font-size: 30px;top: 15%;color: #838383;" name="images-outline">
+      <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+    </ion-icon>
+    <div class="top">
+      <p style="font-size: 30px; font-weight: bold; color:whitesmoke;position: absolute;left: 10%;">Add your space</p>
+    </div>
+    <div *ngIf="viewSpace==1">
+      <ion-grid style="margin: 0%;" > 
+        <ion-row  *ngFor="let x of ret_array">
+    
+         
+          <a   [routerLink]="['/update-space/',x]">{{x}}</a>
+   
+        </ion-row>
+      </ion-grid>
+  </div>
+ 
+    <div class="bottom" *ngIf="viewSpace==0">
+        
+  
+  
+      
+  
+      <div style="position: absolute;width: 6.5%;height: 4%; border-radius: 50%; background-color:white;top: 15%;left: 1%; display: flex;justify-content: center;align-items: center;">
+      <ion-icon style="font-size: 20px;color: white;background-color: #16D6E3; border-radius: 50%;" name="add-circle-outline"></ion-icon>
+    </div>
+
+      <form  style="height: 100%;" [formGroup]="addCoSpaceForm">
+        
+        <ion-item>
+          <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Space category</ion-label>
+          <ion-select  formControlName="categories">
+              <ion-select-option value="private office">Private Office</ion-select-option>
+              <ion-select-option value="boardroom">BoardRoom</ion-select-option>
+              <ion-select-option value="Pair">Pair Office</ion-select-option>
+              <ion-select-option value="Sharing">Shared Office</ion-select-option>
+              <ion-select-option value="OpenSpace">Open Plan</ion-select-option>
+           
+          </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Category Number</ion-label>
+        <ion-select formControlName="category_number">
+          
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+   
+        </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input  type="text" formControlName="price" placeholder="Price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea  type="text" formControlName="description" placeholder="Description" style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
+    </ion-item>
+    <p style="font-size: 12px;font-weight: bold; text-align: center">Enter your address below.</p>
+    <ion-item><ion-input formControlName="address" placeholder="Address"></ion-input></ion-item>
+    <ion-item><ion-input formControlName="city" placeholder="City"></ion-input></ion-item>
+    <ion-item><ion-input formControlName="province" placeholder="Province"></ion-input></ion-item>
+    <div style="height: 40%; overflow: visible;">
+    <!-- ............................................................................................. -->
+    <ion-grid>
+      <ion-row style="color: grey;margin: 5px;">
+        <ion-col *ngFor="let amenities of amenitiesData">
+          <div style="font-size: 12px;">{{ amenities.name }} <br>  <input type="checkbox"   (change)="onChange(amenities.name, $event.target.checked)"  />
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="submit()" style="--background:#303d3d"> Submit</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="view()"> View Spaces</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </div>
+   
+      </form>
+
+     
+   
+
+
+  
+    </div>
+    
+  </div>
+
+  </ion-content>
+  <ion-footer style="position: absolute; height: 50px;bottom: 0px;background-color:  #303d3d; display: flex;justify-content: center;align-items: center;" >
+    
+    <ion-icon [routerLink]="'/profile'" style="font-size: 30px;position: absolute;right: 7%;color: grey;" name="person-outline"></ion-icon>
+    <ion-icon [routerLink]="'/favourites'" style="font-size: 30px;position: absolute;right: 45%;color: grey;" name="heart-outline"></ion-icon>
+    <ion-icon [routerLink]="'/owner-landing'" style="font-size: 30px;position: absolute;left: 7%;color: grey;" name="home-outline"></ion-icon>
+    <!-- <ion-icon [routerLink]="'/upload-space'" style="position: absolute;left:33%;font-size: 30px;color: grey;" name="add-circle-outline"></ion-icon> -->
+  </ion-footer>

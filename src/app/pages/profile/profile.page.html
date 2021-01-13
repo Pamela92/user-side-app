@@ -1,0 +1,191 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div  class="wrapper">
+
+    <div *ngFor="let x of array" class="top">
+      <img style="width: 100%; height: 100%;" src="assets/profilebg.jpg" >
+
+      <ion-avatar style="position: absolute; top: 20%; width: 30%; height: 40%;">
+        <!-- <ion-icon style="position: absolute;top: 25%;font-size: 30px;color: white; font-weight:bold;left: 90%;"
+          name="create-outline"></ion-icon> -->
+        <img [src]="x.img_profile">
+    
+      </ion-avatar>
+      <p style="position:absolute; font-weight:bold;color:white; bottom:20%"> {{x.name}} {{x.surname}}</p>
+      <p style="position:absolute;color:white; bottom:15%; font-size: 12px;"> {{x.address}}</p>
+
+    </div>
+<div style="width: 100%;height: 10%; position: absolute;bottom: 57%;display: flex;justify-content: center;"> 
+<ion-button [routerLink]="'/profile-add'" style="height: 25px;--background:whitesmoke; font-size: 11px;color: black;opacity: 80%;"> Edit</ion-button>
+</div>
+    <div  class="bottom">
+      
+      <ion-card *ngFor="let x of array"
+        style="width: 90%; height: 90%; display: flex;justify-content: left;align-items: initial;flex-direction: column;">
+        <ion-grid style="margin: 0;width:100%;">
+          <!-- <ion-row>
+            <p style="font-weight: bold; font-size:14px;position:absolute;left:3%;">Description <br><span style="font-weight: lighter;">{{x.aboutus}}</span></p>
+          </ion-row> -->
+          <ion-row>
+            <span style="font-weight: bold;">AboutUs </span>
+          </ion-row>
+          <ion-row>
+              <span><b>phone: </b> {{x.phone}}  </span>  
+            </ion-row>
+            <ion-row>
+              <span><b>Email: </b> {{x.email}} </span>  
+            </ion-row>
+        </ion-grid>
+        
+  
+        <!-- <p style="position: absolute;left: 3%; top: 16%;">{{x.aboutus}}</p> -->
+        </ion-card>
+    
+    </div>
+    <div class="segments">
+
+      <ion-segment [(ngModel)]="selectedtabs " style="position: absolute; top: 0px;">
+        <ion-segment-button value="Spaces">
+          <ion-label>Spaces</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Reviews">
+          <ion-label>Reviews</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+
+      <div style="width: 100%; height: 85%; display: flex;justify-content: center;align-self: center;"
+        *ngIf="selectedtabs == 'Spaces'">
+        <ion-card style="width: 90%;height: 60%;background-color: white;position: absolute;bottom: 5%;">
+         spaces
+        </ion-card>
+      </div>
+      <div style="width: 100%; height: 85%; display: flex;justify-content: center;align-self: center;"
+        *ngIf="selectedtabs == 'Reviews'">
+
+        <ion-card  style="width: 90%;height: 70%;background-color: white;position: absolute;bottom: 5%;">
+          <ion-avatar style="position: absolute; top: 10%;left: 5%;">
+            <img style="width: 50px; height: 50px;" src="assets/bg.jpg">
+          </ion-avatar>
+          <p style="position: absolute;left: 23%;top: 5%; font-size: 11px;">Reviewer</p>
+          <p style="position: absolute;top: 5%;right: 5%;font-size: 11px;">10-23-12</p>
+        <p style="position: absolute;top: 30%;left: 20%;">This it the first review card</p>
+
+
+        </ion-card>
+      </div>
+
+
+
+
+    </div>
+
+   
+
+  </div>
+</ion-content>
+  <!-- <ion-card  *ngFor="let x of array; let i = index">
+    <div  >
+<ion-grid>
+  <ion-row>
+    <ion-col size="4">
+    </ion-col>
+    <ion-col size="4">
+      <ion-avatar style="height:100px;width:100px;">
+        <img  src="assets/profile.jpg">
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="4">
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+     
+
+
+     <ion-card-header>
+
+      <ion-grid>
+        <ion-row>
+          {{x.company_name}}
+        </ion-row>
+        <ion-row>
+          {{x.aboutus}}
+        </ion-row>
+        <ion-row>
+          {{x.company_address}}
+        </ion-row>
+        <ion-row>
+          <div *ngFor="let y of x.outside_features;">
+            <ion-card-subtitle *ngIf="y==='Ben 10'"  >
+              <img style="height:15%;width:15%;" src="./assets/outside/228467827.ico" />
+            </ion-card-subtitle>
+          </div>
+        </ion-row>
+        <ion-row>
+          {{x.company_emaile}}
+        </ion-row>
+        <ion-row>
+          {{x.company_tel}}
+        </ion-row>
+        <ion-row>
+          {{x.company_website}}
+        </ion-row>
+        <ion-row>
+          {{x.social_media}}
+        </ion-row>
+      </ion-grid> -->
+
+
+  <!-- 
+       <ion-card-title>{{x.company_name}}</ion-card-title>
+       <ion-card-title>{{x.aboutus}}</ion-card-title>
+       <ion-card-subtitle>{{x.company_address}}</ion-card-subtitle>
+<div *ngFor="let y of x.outside_features;">
+  <ion-card-subtitle *ngIf="y==='Ben 10'"  >
+    <img style="height:15%;width:15%;" src="./assets/outside/228467827.ico" />
+  </ion-card-subtitle>
+</div>
+       <ion-card-subtitle>{{x.company_emaile}}</ion-card-subtitle>
+       <ion-card-subtitle >{{x.company_tel}}</ion-card-subtitle>
+       <ion-card-subtitle>{{x.company_website}}</ion-card-subtitle>
+       <ion-card-subtitle>{{x.social_media}}</ion-card-subtitle> -->
+  <!-- </ion-card-header>
+   </div>
+ </ion-card>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+          <ion-col>
+             <ion-avatar >
+                <img src="assets/profile.jpg">
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+            <ion-grid>
+              <ion-row>
+                Building 4
+              </ion-row>
+              <ion-row>
+                Kibler park
+              </ion-row>
+              <ion-row>
+                Contains 18 offices...
+              </ion-row>
+            </ion-grid>
+        </ion-col>   
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <a  style="color: black;" [routerLink]="'/add-profile-modal'">update profile</a> -->

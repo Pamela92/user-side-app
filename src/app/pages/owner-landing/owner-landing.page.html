@@ -1,0 +1,85 @@
+
+<ion-content >
+  <div class="bgImg">  <img style="width: 100%; height: 50%;" src="assets/bgg.jpg"></div>
+  <div class="wrapper">
+  <div class="textBorder">
+  <!-- <p style="font-weight: bold;font-size: 30px;position: absolute;left: 10%;">Synergic</p>  -->
+  
+  </div>
+  <div class="stats">
+  
+    <p style="font-size: 10px; color: rgb(150, 141, 141);position: absolute;right: 3%;">25-12-12</p>
+    <!-- <p style="font-size: 20px; font-weight: bold; color: white;position: absolute;left: 3%;">My stats</p> -->
+    <p style="font-size: 12px;position: absolute;color: rgb(150, 141, 141);left: 3%;">Your content at a bird eye's view</p>
+  </div>
+  <div class="stats2">
+  
+    
+    <p style="font-size: 12px;font-weight: bold; color: white;position: absolute;left: 3%;">My stats</p> 
+   
+  </div>
+  <div class="catagories">
+  
+    <ion-card  style="width:40%; background-color: #A944F1; height: 100%;">
+      <p style="position: absolute;left: 5%;top: 2%;font-weight: bold;font-size: 20px;">256</p>
+    <p style="position: absolute; right:5%;bottom: 2%;font-size: 10px;">Users</p>
+    </ion-card>
+    <ion-card  style="width:40%; background-color: #16D6E3; height: 100%;font-size: 20px;font-weight: bold">
+       <p style="position: absolute;left:5%;top: 2%;">300</p>
+       <p style="position: absolute; right:5%;bottom: 2%;font-size: 10px;">Profits</p>
+      </ion-card>
+    <ion-card  style="width:40%; background-color: #2D98E6; height: 100%;font-size: 20px;font-weight: bold">  
+       <p style="position: absolute;left: 5%;top: 2%;">150</p>
+       <p style="position: absolute; right:5%;bottom: 2%;font-size: 10px;">Spaces</p>
+      </ion-card>
+  </div>
+  
+  <div class="bottom">
+    <!-- <div class="bottomText">
+      Scenes
+    </div>
+  <div class="bottom1"> <img style="width: 90%; height: 100%;" src="assets/owner.jpg" alt=""> </div>
+  <div class="bottom2"> <img style="width: 100%; height: 100%;" src="assets/owner1.jpg" alt=""> </div>
+  <div class="bottom3"> <img style="width: 100%; height: 100%;" src="assets/owner2.jpg" alt=""></div> -->
+  
+  
+  <ion-segment style="position: absolute; top: 0%;" [(ngModel)]="selectedtabs" >
+    <ion-segment-button  value="History" >
+      <ion-label style="color:grey;">New bookings</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Newbookings">
+      <ion-label style="color: grey;">History</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+   <div class="segments" style="width: 100%; height: 85%;position: absolute;bottom:0px;" *ngIf="selectedtabs == 'History'">  
+   <ion-card style="width: 80%;height: 90%;background-color: black; opacity: 30%;">
+  New bookings
+   </ion-card>
+  </div>
+  <div class="segments" style="width: 100%; height: 85%;position: absolute;bottom:0px;" *ngIf="selectedtabs == 'Newbookings'"> 
+    
+    <ion-card style="width: 80%;height: 90%;background-color: black; opacity: 30%; ">
+      History
+    </ion-card>
+   
+    
+    
+    </div> 
+  
+  </div>
+  <!-- <ion-avatar style="position: absolute; top:5%; right: 5%;">
+    <img  src="assets/bg.jpg">
+  </ion-avatar> -->
+  <!-- <ion-icon  [routerLink]="'/profile'" style="position: absolute; top:10%; right: 4%; background-color:white;border-radius: 50%;"  name="add"></ion-icon> -->
+  </div>
+  
+  </ion-content>
+  <ion-footer style="position: absolute; height: 50px;bottom: 0px;background-color:  #303d3d; display: flex;justify-content: center;align-items: center;" >
+  
+    <ion-icon [routerLink]="'/profile'" style="font-size: 30px;position: absolute;right: 7%;color: grey;" name="person-outline"></ion-icon>
+    <ion-icon [routerLink]="'/favourites'" style="font-size: 30px;position: absolute;right: 33%;color: grey;" name="heart-outline"></ion-icon>
+    <ion-icon [routerLink]="'/owner-landing'" style="font-size: 30px;position: absolute;left: 7%;color: grey;" name="home-outline"></ion-icon>
+    <ion-icon [routerLink]="'/add-space'" style="position: absolute;left:33%;font-size: 30px;color: grey;" name="add-circle-outline"></ion-icon>
+  </ion-footer>
+  

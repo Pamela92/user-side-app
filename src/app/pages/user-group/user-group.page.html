@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>user-group</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-radio-group [(ngModel)]="value_selected"> 
+    <ion-list-header>
+      <ion-label>User Froup</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>User</ion-label>
+      <ion-radio slot="start" color="success"  value="user" ></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Owner</ion-label>
+      <ion-radio slot="start" color="tertiary"  value="owner" ></ion-radio>
+    </ion-item>
+   </ion-radio-group> 
+{{value_selected}}
+<ion-item>
+  <ion-button (click)="submit()"  type="submit" expand="block" >Submit</ion-button>
+</ion-item>
+</ion-content>

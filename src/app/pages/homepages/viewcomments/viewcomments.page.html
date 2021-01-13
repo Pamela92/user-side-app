@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>viewcomments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list>
+  <ion-item *ngFor="let y of previewArray">
+    <ion-grid>
+      <ion-row>
+        <p>{{y.comment}}</p>
+      </ion-row>
+      <ion-row>
+        <ion-col>Date: {{y.datecomment}} </ion-col>
+        <ion-col>Time: {{y.timecomment}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-list>
+</ion-content>

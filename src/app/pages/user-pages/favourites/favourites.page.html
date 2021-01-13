@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>favourites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let x of favouriteArray">
+       <a [routerLink] = "['/favourite-space',x.spaceuid,x.companyuid,x.compantprofileuid,x.favouriteuid]">{{x.workspace}} {{x.price}}</a> 
+    </ion-row>
+  </ion-grid>
+</ion-content>

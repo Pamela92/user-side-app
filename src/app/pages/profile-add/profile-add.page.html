@@ -1,0 +1,260 @@
+
+<ion-content>
+  <div class="holder">
+    
+    <!-- <ion-icon style="position: absolute;left:3%;font-size: 30px;top: 15%;color: #303d3d;" name="images-outline"></ion-icon> -->
+    <div class="top">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+
+     <img style="width:100%;height:100%;opacity: 30%;" src="assets/bgg.jpg" >
+    </div>
+    <!-- <ion-button style="position: absolute;top: 15%;right: 5%;height: 20px;--background:rgb(224, 18, 53);"> Submit</ion-button> -->
+  <!-- <div style="position: absolute;width: 6.5%;height: 4%; border-radius: 50%; background-color:white;top: 15%;left: 1%; display: flex;justify-content: center;align-items: center;">
+    <ion-icon style="font-size: 20px;color: white;background-color: #16D6E3; border-radius: 50%;" name="add-circle-outline"></ion-icon>
+  </div> -->
+  <!-- <ion-icon style="font-size: 50px; position: absolute;top: 20%;right: 5%;color:red;" name="add-circle-outline"></ion-icon> -->
+    <div class="bottom">
+      <p style="font-size:22px;font-weight: bolder;position: absolute;top: 0%;left: 5%;color: white;">Profile</p>
+     
+      <form *ngIf="editForm==false;else loggedOut" [formGroup]="updateForm" type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
+    
+        <ion-item>
+          <ion-input   type="text" formControlName="name" placeholder="name..."></ion-input>
+          <div style="color:red;" *ngIf="isValidInput('name')"
+          class="alert alert-danger">
+          <div *ngIf="updateForm.controls['name'].errors.required">
+            name is required.
+          </div>
+          <div *ngIf="updateForm.controls['name'].errors.maxLength">
+           Maximum length is 20
+          </div>
+          <div *ngIf="updateForm.controls['name'].errors.minLength">
+            min length is 2
+           </div>
+           <div *ngIf="updateForm.controls['name'].errors.pattern">
+            Chars are not allowed
+           </div>
+        </div>
+        </ion-item>
+  <ion-item>
+    <ion-input  type="text" formControlName="surname" placeholder="surname..."></ion-input>
+    <div style="color:red;" *ngIf="isValidInput('surname')"
+          class="alert alert-danger">
+          <div *ngIf="updateForm.controls['surname'].errors.required">
+            surname is required.
+          </div>
+          <div *ngIf="updateForm.controls['surname'].errors.maxLength">
+           Maximum length is 20
+          </div>
+          <div *ngIf="updateForm.controls['surname'].errors.minLength">
+            min length is 2
+           </div>
+           <div *ngIf="updateForm.controls['surname'].errors.pattern">
+            Chars are not allowed
+           </div>
+        </div>
+  </ion-item>
+ 
+  <ion-item>
+    <ion-input  type="text" formControlName="phone" placeholder="phone..."></ion-input>
+    <div style="color:red;" *ngIf="isValidInput('phone')"
+    class="alert alert-danger">
+    <div *ngIf="updateForm.controls['phone'].errors.required">
+      phone is required.
+    </div>
+    <div *ngIf="updateForm.controls['phone'].errors.maxLength">
+     Maximum length is 10
+    </div>
+     <div *ngIf="updateForm.controls['phone'].errors.pattern">
+      Incorrect phone number
+     </div>
+  </div>
+  </ion-item>
+  <ion-item>
+    <ion-input  type="text" formControlName="email" placeholder="email..."></ion-input>
+    <div style="color:red;" *ngIf="isValidInput('email')"
+    class="alert alert-danger">
+    <div *ngIf="updateForm.controls['email'].errors.required">
+     Email is required
+    </div>
+     <div *ngIf="updateForm.controls['surname'].errors.pattern">
+    incorrect email format
+     </div>
+    </div>
+  </ion-item>
+  <ion-textarea  type="text" formControlName="address" placeholder="address" style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
+  <div style="color:red;" *ngIf="isValidInput('address')"
+  class="alert alert-danger">
+  <div *ngIf="updateForm.controls['address'].errors.required">
+   Email is required
+  </div>
+  </div>
+  <ion-item>
+    <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+    <div>
+      <div *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+    </div>
+  </ion-item>
+  <!-- <div *ngFor="let cartoon of cartoonsData">
+    <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+    {{ cartoon.name }}
+  </div> -->
+<!-- <p style="font-size:14px; font-weight: bolder;color: gray;">Select enemities</p> -->
+
+  <ion-button (click)="submit()"   [disabled]="!updateForm.valid"  expand="full" color="danger">Submit</ion-button>
+  <ion-button (click)="update()"  expand="full" color="warning">Edit</ion-button>
+  <br><br><br><br><br>
+    </form>
+    <ng-template #loggedOut>
+      <form  #editForm="ngForm" *ngFor="let x of array"  type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
+       
+        <ion-item>         
+           <ion-input
+              type="text"    
+              [(ngModel)]="x.name" 
+              name="name" 
+              placeholder="Company name.."
+              required
+               minlength="2"
+               pattern="^[a-zA-Z]+$"
+               #name="ngModel" 
+               >
+            </ion-input>
+            <div style="color:red;" *ngIf="!name?.valid && (name?.dirty || name?.touched)">
+              Invalid First Name
+              <div *ngIf="name.errors.required">
+                First Name is required
+             </div>
+             <div *ngIf="name.errors.minlength">
+               First Name Minimum Length is {{name.errors.minlength?.requiredLength}}
+             </div>
+           </div>
+         </ion-item>
+        <ion-item>
+          <ion-input  
+              type="text"  
+              placeholder="surname"
+              [(ngModel)]="x.surname" 
+              name="surname"
+              required
+              minlength="2"
+              pattern="^[a-zA-Z]+$"
+              #surname="ngModel" 
+              >
+          </ion-input>
+          <div style="color:red;" *ngIf="!surname?.valid && (surname?.dirty || surname?.touched)">
+            Invalid surname
+            <div *ngIf="surname.errors.required">
+              Surname is required
+           </div>
+           <div *ngIf="surname.errors.minlength">
+             First surname Minimum Length is {{surname.errors.minlength?.requiredLength}}
+           </div>
+           <div *ngIf="surname.errors.pattern">
+            Alphabets only!
+          </div>
+         </div>
+        </ion-item>
+       <ion-item>
+         <ion-input  
+          type="text"  
+          placeholder="Email"
+          [(ngModel)]="x.email"
+          required 
+          email 
+          #email="ngModel" 
+          name="email">
+       </ion-input>
+       <div style="color:red;" *ngIf="!email?.valid && (email?.dirty || email?.touched)">
+        Invalid email
+        <div *ngIf="surname.errors.required">
+          email is required
+       </div>
+       <div *ngIf="surname.errors.email">
+        Email format incorrect
+       </div>
+     </div>
+      </ion-item>
+      <ion-item>
+        <ion-input  
+           type="text"  
+           placeholder="phone"
+           [(ngModel)]="x.phone" 
+           name="phone"
+           required
+           maxlength="10"
+     
+           #phone="ngModel" 
+           >
+          </ion-input>
+          <div style="color:red;" *ngIf="!phone?.valid && (phone?.dirty || phone?.touched)">
+            Invalid phone
+            <div *ngIf="phone.errors.required">
+              phone is requi
+           </div>
+           <div *ngIf="phone.errors.maxlength">
+            maxlength is 10
+         </div>
+    
+         </div>
+        </ion-item>
+
+  <ion-textarea  
+           type="text"  
+           placeholder="Description"
+           [(ngModel)]="x.address" 
+           name="address" 
+           required
+           maxlength="50"
+           #address="ngModel" 
+           style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;">
+     </ion-textarea>
+     <div style="color:red;" *ngIf="!address?.valid && (address?.dirty || address?.touched)">
+      Invalid address
+      <div *ngIf="address.errors.required">
+        address is required
+     </div>
+     <div *ngIf="address.errors.maxlength">
+      maxlength is 10
+   </div>
+
+   </div>
+  <ion-item>
+    <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+   <div>
+     <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+   </div>
+   
+    <button (click)="changeImage()"> Change Profile</button>
+  </ion-item>
+  
+
+
+
+
+
+<ion-item>
+  <ion-button (click)=" editForms()" [disabled]="!editForm.valid"  expand="full" color="danger">Edit</ion-button>
+  <ion-button (click)=" editAll()"  expand="full" color="warning">Edit All</ion-button>
+</ion-item>
+
+
+
+  <br><br><br><br><br>
+    </form>
+ 
+
+    </ng-template>
+      
+    </div>
+  </div>
+  </ion-content>
+  <ion-footer style="position: absolute; height: 50px;bottom: 0px;background-color:  #303d3d; display: flex;justify-content: center;align-items: center;" >
+    
+    <ion-icon [routerLink]="'/profile'" style="font-size: 30px;position: absolute;right: 7%;color: grey;" name="person-outline"></ion-icon>
+    <ion-icon [routerLink]="'/favourites'" style="font-size: 30px;position: absolute;right: 45%;color: grey;" name="heart-outline"></ion-icon>
+    <ion-icon [routerLink]="'/owner-landing'" style="font-size: 30px;position: absolute;left: 7%;color: grey;" name="home-outline"></ion-icon>
+    <!-- <ion-icon [routerLink]="'/upload-space'" style="position: absolute;left:33%;font-size: 30px;color: grey;" name="add-circle-outline"></ion-icon> -->
+  </ion-footer>

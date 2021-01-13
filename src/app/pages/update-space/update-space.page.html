@@ -1,0 +1,136 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>update-space</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+  <ion-item  *ngFor="let x of arrayList">
+    <ion-avatar slot="start">
+      <img [src]="x.image">
+    </ion-avatar>
+    <ion-label>
+     <ion-grid>
+       <ion-row>
+        {{x.categories}}
+       </ion-row>
+       <ion-row>
+        {{x.price}}
+       </ion-row>
+       <ion-row>
+        {{x.address}}
+       </ion-row>
+       <ion-row>
+        {{x.description}}
+       </ion-row>
+       <ion-row>
+         <ion-col *ngFor="let y of x.amenities">
+          {{y}} 
+         </ion-col>
+       </ion-row>
+       <ion-row>
+         <ion-col>
+          <ion-button (click)="EditForm(x.spaceuid)"> Edit</ion-button>
+         </ion-col>
+         <ion-col>
+          <ion-button (click)="remove(x.spaceuid)" > Remove</ion-button>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+    </ion-label>
+  </ion-item>
+</ion-row>
+      <ion-row>
+        
+  <div *ngIf="showFormvalue==1">
+        <form type="text" style="width: 100%;top: 15%;height: 80%;">
+       
+              
+             <ion-input
+                type="text"    
+                [(ngModel)]="description_" 
+                name="description_" 
+                placeholder="Company name..">
+              </ion-input>
+       
+     
+            <ion-input  
+                type="text"  
+                placeholder="price..."
+                [(ngModel)]="price_" 
+                name="price_">
+            </ion-input>
+      
+ 
+           <ion-input  
+            type="text"  
+            placeholder="province ..."
+            [(ngModel)]="province_" 
+            name="province_">
+         </ion-input>
+  
+       
+    <ion-textarea  
+             type="text"  
+             [(ngModel)]="description_" 
+             name="description_" 
+             style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
+        
+     
+             <ion-textarea  
+             type="text"  
+             [(ngModel)]="address_" 
+             name="address_" 
+             style="border-style: solid;height: 15%;border-width: 1px;border-color: rgb(196, 190, 190);border-top: 0px;margin: 0px;"></ion-textarea>
+         
+      
+              <ion-label>Category Number</ion-label>
+              <ion-select  [(ngModel)]="category_number_" name="category_number_">
+                
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+         
+              </ion-select>
+              <ion-item>
+                <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+                <button (click)="changeImage()"> Change Profile</button>
+              </ion-item>
+
+
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+       <ion-item><p style="font-size:14px; font-weight: bolder;color: gray;">update enemities</p></ion-item>
+      </ion-row>
+       <ion-row style="color: grey;margin: 5px;">
+         <ion-col *ngFor="let cartoon of cartoonsData">
+           <div style="font-size: 12px;">{{ cartoon.name }} <br>  <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+           </div>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+   </ion-item>
+
+
+  
+  <ion-item>
+    <ion-button (click)=" updateSpace()"  expand="full" color="danger">Edit</ion-button>
+    <ion-button (click)=" close()"   expand="full" color="warning">Close</ion-button>
+  </ion-item>
+  
+  
+  
+    <br><br><br><br><br>
+      </form>
+   
+        {{ this.description }}
+      </div>
+      </ion-row>
+    </ion-grid>
+
+
+</ion-content>
