@@ -64,7 +64,7 @@ export class ViewSpacePage implements OnInit {
   constructor(public loader:LoadingController, public alertCtrl: AlertController,private popover:PopoverController,private router: Router,private formBuilder:FormBuilder,public userservice :UserService,private route:ActivatedRoute,public ownerservice:OwnerServiceService,public account:SignInSignUpService) { 
    console.log(moment().toDate())
 
-    if(!this.account.getUserSession()){
+    if(!this.account.getUserSession()){ 
    this.userservice. continueBooking(this.spaceuid,this.profuid,this.spaceId)
     console.log(this.account.getUserSession())
     firebase.firestore().collection("profiles")

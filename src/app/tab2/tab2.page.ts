@@ -11,7 +11,7 @@ export class Tab2Page {
   public lat: any;
   public lng: any;
   showingCurrent: boolean = true;
-  address: string;
+  address: string; 
   constructor(private nativeGeocoder: NativeGeocoder, private ngZone: NgZone) { }
 
   ngOnInit() {
