@@ -92,9 +92,9 @@
             </ion-col>
             <ion-col>
               <span>Timein</span>
-              <ion-datetime display-format="h:mm A" formControlName="timein" minuteValues="0" picker-format="h:mm A" ></ion-datetime>
-<!-- 
-              <ion-input [min]="minTime" type="time" formControlName="timein"></ion-input> -->
+              <!-- <ion-datetime display-format="h:mm A" formControlName="timein" minuteValues="0" picker-format="h:mm A" ></ion-datetime> -->
+
+              <ion-input [min]="minTime" type="time" formControlName="timein"></ion-input>
               <div style="color:red;" *ngIf="isValidInput('timein')"
               class="alert alert-danger">
               <div *ngIf="reservationForm.controls['timein'].errors.required">
@@ -119,10 +119,11 @@
             </ion-col>
             <ion-col>
               <span>Timeout</span>
-              <ion-datetime display-format="h:mm A" formControlName="timeout" minuteValues="0" picker-format="h:mm A"></ion-datetime>
-              <!-- <ion-input type="time"
+              <!-- <ion-datetime display-format="h:mm A" formControlName="timeout" minuteValues="0" picker-format="h:mm A"></ion-datetime>
+               -->
+              <ion-input type="time"
             
-               formControlName="timeout"></ion-input> -->
+               formControlName="timeout"></ion-input>
               <div style="color:red;" *ngIf="isValidInput('timeout')"
               class="alert alert-danger">
               <div *ngIf="reservationForm.controls['timeout'].errors.required">
@@ -132,7 +133,7 @@
             </ion-col>
           </ion-row>
           <ion-row style="color:red;">
-            {{this.messageValue}}
+            
           </ion-row>
         </ion-grid>
         <ion-grid *ngIf="this.account.getUserSession()">
