@@ -16,6 +16,15 @@ import { UserService } from 'src/app/services/user.service';
 import { Plugins } from '@capacitor/core';
 const { Geolocation } = Plugins;
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { Observable } from 'rxjs/internal/Observable';
+
+
+///Search
+export enum SearchType{
+  all = '',
+  privateoffice = 'private office',
+  boardroom='boardroom'
+}
 
 @Component({
   selector: 'app-working-spaces',
@@ -39,12 +48,23 @@ export class WorkingSpacesPage implements OnInit {
   showingCurrent: boolean = true;
   showMap: number=0;
 
-  constructor( private ngZone: NgZone,private nativeGeocoder: NativeGeocoder,public userservice :UserService,private route:ActivatedRoute,public ownerservice:OwnerServiceService,public account:SignInSignUpService) { 
+
+ //search
+ searchTerm:string='';
+ results:Observable<any>;
+ searchedSpaces:any=[]
+  type: SearchType;
+  searchedSpacesValue: number=-1;
+
+  constructor(private router: Router, private ngZone: NgZone,private nativeGeocoder: NativeGeocoder,public userservice :UserService,private route:ActivatedRoute,public ownerservice:OwnerServiceService,public account:SignInSignUpService) { 
   this.locate()
   if(this.account.getUserSession()!='undefined'){
     
   }
   
+
+
+
 
     firebase.firestore().collectionGroup("space")
     
@@ -59,9 +79,13 @@ export class WorkingSpacesPage implements OnInit {
   }
 
   ngOnInit() {
-   
+  
   }
  
+
+
+
+
   addToFavourites(profilesuid ,profileuid,spaceuid,namespace,price){
   console.log(spaceuid)
   
@@ -125,6 +149,44 @@ closeMap(){
     return 1
   }
 
+
+  //search
+  searchChanged() {
+    
+    // Call our service function which returns an Observable
+   this.results = this.searchData(this.type);
+   console.log(this.results )
+   this.searchedSpacesValue=-1
+   this.searchedSpaces=[]
+  }
+
+
+  //Searchbar  SearchType
+searchData(type: SearchType): Observable<any> {
+  
+  firebase.firestore().collectionGroup("space").where("categories","==",type)
+    
+    .get()
+    .then(snap => {
+      snap.forEach(dat=>{
+        console.log(dat.data())
+        this.searchedSpaces.push( Object.assign(dat.data(),{'spaceId':dat.id}) )
+        this.searchedSpacesValue=this.searchedSpaces-1;
+      })
+    })
+
+  return this.searchedSpaces
+}
+
+
+
+logout(){
+  this.account.logOut();
+  this.userservice.getSpaceuidDestroy()
+  this.userservice.getProfuidDestroy()
+  this.userservice.getSpaceIdDestroy()
+  this.router.navigateByUrl('working-spaces');
+}
 
 }
 

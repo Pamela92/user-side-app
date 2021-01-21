@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <div  *ngIf="this.account.getUserSession()" ><a style="padding-left:5%;padding-top:5%" (click)="logout()">LogOut</a></div>
     <ion-buttons *ngIf="!this.account.getUserSession()" slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>

@@ -124,6 +124,18 @@ export class ViewSpacePage implements OnInit {
     })
   }
 
+
+console.log(this.getProfuid+" "+this.spaceuid)
+console.log(this.getSpaceuid+" "+this.profuid)
+console.log(this.getSpaceId+" "+this.spaceId)
+
+/*
+  spaceuid = this.route.snapshot.params.spaceuid;
+  profuid = this.route.snapshot.params.profuid;
+  spaceId= this.route.snapshot.params.spaceId;
+
+*/
+
   }
 
 ////////////Comment Form//////////////
@@ -367,5 +379,9 @@ async showAlert() {
     console.log(result); 
 
   } 
-
+  ////Logout
+  logout(){
+    this.account.logOut();
+    this.router.navigateByUrl('working-spaces');
+  }
 }

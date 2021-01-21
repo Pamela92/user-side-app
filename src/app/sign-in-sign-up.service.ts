@@ -84,7 +84,15 @@ export class SignInSignUpService {
   getEmail() {
     return this.emailOwner;
   }
-
+///////Logout///////
+logOut() {
+  this.uidOwner =null;
+  this.emailOwner = null;
+   this.uidUser= null;
+   this.status = null;
+  return this.uidOwner ;
+}
+////////////////////
   userGroup(uid, usergroup, email) {
     var db = firebase.firestore();
     var userGroupCollecion = db.collection("profiles");
@@ -168,4 +176,5 @@ export class SignInSignUpService {
   returnStatus() {
     return this.status
   }
+  
 }

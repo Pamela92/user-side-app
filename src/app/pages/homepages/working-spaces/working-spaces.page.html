@@ -6,6 +6,22 @@
 <ion-content fullscreen>
 
 
+<!-- Searchbar -->
+
+<ion-item>
+  <ion-label>Filter by:</ion-label>
+  <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+    <ion-select-option value="">All</ion-select-option>
+    <ion-select-option value="private office">private office</ion-select-option>
+    <ion-select-option value="boardroom">boardroom</ion-select-option>
+    <ion-select-option value="episode">Episode</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+
+<div *ngIf="this.searchedSpacesValue==-1" >
+  No search
   <ion-card  *ngFor="let x of workingSpaces">
     {{getDistanceFromLatLonInKm(this.latitude,this.longitude,x.lat,x.lng)}}
     <div *ngIf="this.distance < 50"> 
@@ -166,5 +182,170 @@
    </ion-card-content>
   </div>
   </ion-card>
+</div>
+
+<!-- When the search field is triggared -->
+<div *ngIf="this.searchedSpacesValue!==-1" >
+  with search
+  <ion-card  *ngFor="let x of searchedSpaces">
+    {{getDistanceFromLatLonInKm(this.latitude,this.longitude,x.lat,x.lng)}}
+    <div *ngIf="this.distance < 50"> 
+      <!-- *ngIf="this.distance > 50" -->
+    <img style=" z-index: -1;"  [src]="x.image" />
+    <p  *ngIf="this.account.getUserSession()" style=" position: absolute;
+    left: 46%;
+    top: 60px;
+   "><ion-icon (click)="addToFavourites(x.uid, x.workspace_uid,x.spaceId,x.categories,x.price)" style="font-size:4em;color:red;" name="heart-circle-outline"></ion-icon></p>
+
+    <ion-card-header>
+      <ion-card-title>{{x.categories}} For R{{x.price}}.00</ion-card-title>
+      <ion-card-subtitle>{{x.address}}</ion-card-subtitle>
+      <ion-grid>
+        <ion-row >
+          <div >{{getDistanceFromLatLonInKm(this.latitude,this.longitude,x.lat,x.lng)}}</div>
+       </ion-row>
+       <ion-row >
+        <div *ngIf="this.distance"> Distance:{{this.distance}}Km</div>
+     </ion-row>
+     <ion-row >
+      <div *ngIf=" this.showMap==1" style="width: 100%;">
+            
+        <agm-map [usePanning]="true" [latitude]="lat" [longitude]="lng" [zoom]="12" [disableDefaultUI]="false">
+          <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]=true></agm-marker>
+        </agm-map>
+        <ion-grid class="status-grid">
+          <ion-row>
+            <ion-col *ngIf="showingCurrent">
+              Showing Current Location
+            </ion-col>
+            <ion-col *ngIf="!showingCurrent"> 
+              Showing Geocoded Location
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+   </ion-row>
+   <ion-row>
+    <ion-button color="success"  style="width: 100%;" *ngIf=" this.showMap==0"  (click)="setCurrentPosition(x.lat,x.lng)" expand="full" class="ion-margin">Show Map
+    </ion-button>
+    <ion-button color="danger"  style="width: 100%;" *ngIf=" this.showMap==1" (click)=" closeMap()" expand="full" class="ion-margin">CloseMap
+    </ion-button>
+   </ion-row>
+   
+      </ion-grid>
+      
+           
+       
+           
+       
+       
+      <ion-grid>
+        <ion-row >
+          <ion-col size="5"> </ion-col>
+          <ion-col size="6"> </ion-col>
+          <ion-col size="1"> <a [routerLink] = "['/view-space',x.workspace_uid,x.uid,x.spaceId]"> <ion-icon name="arrow-forward-outline"></ion-icon> </a></ion-col>
+        </ion-row>
+      </ion-grid>
+     
+    </ion-card-header>
+    <ion-card-content>
+<ion-grid >
+  <ion-row  >
+    <ion-col *ngFor="let y of x.amenities" style='text-align: center;'>
+     <ion-grid>
+       <ion-row>
+         <ion-col style='text-align: center;'>
+          <div *ngIf="y=='lights'">
+           <div> <i class='fas fa-lightbulb' style='font-size:24px'></i></div>
+         <div><span>lights</span></div> 
+        </div> 
+        <div *ngIf="y=='chairs'" >
+         <div><i class='fas fa-chair' style='font-size:24px'></i></div> 
+         <div><span>chairs</span></div> 
+        </div>
+        <div *ngIf="y=='aircon'" >
+         <div><i class='far fa-snowflake' style='font-size:24px'></i></div> 
+         <div><span>aircon</span></div> 
+        </div>
+     
+        <div *ngIf="y=='plugs'" >
+         <div><i class='fas fa-plug' style='font-size:24px'></i></div> 
+         <div><span>plugs</span></div> 
+        </div>
+        <div *ngIf="y=='kitchen'" >
+         <div><i class='fas fa-utensils' style='font-size:24px'></i></div> 
+         <div><span>kitchen</span></div> 
+        </div>
+        <div *ngIf="y=='sunlight'" >
+         <div><i class='fas fa-sun' style='font-size:24px'></i></div> 
+         <div> <span>sunlight</span></div>
+        </div>
+        <div *ngIf="y=='toilet'" >
+         <div><i class='fas fa-toilet-paper' style='font-size:24px'></i></div> 
+         <div><span>toilet</span></div> 
+        </div>
+        <div *ngIf="y=='clean'" >
+         <div> <i class='fas fa-heart' style='font-size:24px'></i></div>
+          <div><span>clean</span></div>
+        </div>
+        <div *ngIf="y=='safety'" >
+         <div><i class='fas fa-fire-extinguisher'style='font-size:24px' ></i></div> 
+          <div><span>safety</span></div>
+        </div>
+        <div *ngIf="y=='tv'" >
+          <div><i class='fas fa-tv' style='font-size:24px'></i></div>
+         <div><span>tv</span></div> 
+        </div>
+        <div *ngIf="y=='wifi'" >
+         <div><i class='fas fa-wifi' style='font-size:24px'></i></div> 
+          <div><span>wifi</span></div>
+        </div>
+        <div *ngIf="y=='microphone'" >
+         <div><i class='fas fa-microphone' style='font-size:24px'></i></div> 
+         <div><span>mic</span></div> 
+        </div>
+        <div *ngIf="y=='speakers'" >
+         <div><i class='fas fa-volume-up' style='font-size:24px'></i></div> 
+         <div><span>speakers</span></div> 
+        </div>
+        <div *ngIf="y=='phone'" >
+         <div> <i class='fas fa-phone-alt' style='font-size:24px'></i></div>
+         <div><span>phone</span></div> 
+        </div>
+        <div *ngIf="y=='chalkboard'" >
+         <div> <i class='fas fa-chalkboard' style='font-size:24px'></i></div>
+         <div><span>chalkboard</span></div> 
+        </div>
+        <div *ngIf="y=='desktop'" >
+         <div><span><i class='fas fa-desktop' style='font-size:24px'></i></span></div> 
+         <div><span>desktop</span></div> 
+        </div>
+        <div *ngIf="y=='bin'" >
+          <div><i class='far fa-trash-alt' style='font-size:24px'></i></div>
+          <div><span>bin</span></div>
+        </div>
+         </ion-col>
+                              
+       </ion-row>
+     </ion-grid>
+    </ion-col>
   
+
+
+
+
+
+
+
+
+
+
+
+  </ion-row>
+
+</ion-grid>
+   </ion-card-content>
+  </div>
+  </ion-card>
+</div>
 </ion-content>

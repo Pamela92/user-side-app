@@ -5,6 +5,7 @@ import 'firebase/database';
 import 'firebase/firestore';
 import { from } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class UserService {
   spaceuid: any;
   profuid: any;
   spaceId: any;
+  workingSpaces: any;
 
   constructor() { }
 
@@ -117,7 +119,23 @@ export class UserService {
   getProfuid(){return this.profuid}
   getSpaceId(){return this.spaceId}
 
+  getSpaceuidDestroy(){
+    this.spaceuid =null
+    return this.spaceuid;
+  }
+  getProfuidDestroy(){
+    this.profuid =null
+    return this.profuid
+  }
+  getSpaceIdDestroy(){
+    this.spaceId =null 
+    return this.spaceId
+  }
+
 setAllnull(){
   return this.spaceuid = null,this.profuid=null, this.spaceId=null;
 }
+
+
+
 }
